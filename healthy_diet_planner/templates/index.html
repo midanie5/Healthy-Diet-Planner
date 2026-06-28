@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy Diet Planner - Beranda</title>
+    <!-- Google Fonts Import -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-utama: #F9F6F0;
+            --bg-sekunder: #DCD3E3;
+            --warna-primary: #6862BC;
+            --warna-card: #FBFAF4;
+            --warna-text: #1E5875;
+            --font-brittany: "Great Vibes", cursive;
+            --font-isi: "Lora", "Times New Roman", serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-utama);
+            color: var(--warna-text);
+            font-family: var(--font-isi);
+            line-height: 1.6;
+        }
+
+        /* Header & Navigasi */
+        header {
+            background-color: var(--warna-card);
+            border-bottom: 2px solid var(--bg-sekunder);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-brittany);
+            font-size: 2.2rem;
+            color: var(--warna-primary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            font-family: var(--font-isi);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: block;
+            margin-top: -10px;
+            color: var(--warna-text);
+            opacity: 0.8;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--warna-text);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--warna-primary);
+            color: #ffffff;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--warna-card);
+            border: 1.5px solid var(--bg-sekunder);
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: rgba(220, 211, 227, 0.4);
+            filter: blur(20px);
+        }
+
+        .badge {
+            background-color: var(--bg-sekunder);
+            color: var(--warna-primary);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+        }
+
+        .title {
+            font-family: var(--font-brittany);
+            font-size: 5rem;
+            color: var(--warna-primary);
+            line-height: 1.1;
+            font-weight: bold;
+        }
+
+        .desc {
+            font-size: 1.2rem;
+            max-width: 800px;
+            color: var(--warna-text);
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 0.9rem 2rem;
+            font-weight: 600;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--warna-primary);
+            color: white;
+            box-shadow: 0 4px 6px rgba(104, 98, 188, 0.2);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--warna-primary);
+            color: var(--warna-primary);
+            background-color: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--warna-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-sekunder);
+            color: var(--warna-text);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(220, 211, 227, 0.8);
+            transform: translateY(-2px);
+        }
+
+        /* Grid info */
+        .features {
+            display: grid;
+            grid-template-cols: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background-color: var(--warna-card);
+            border: 1px solid var(--bg-sekunder);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--warna-primary);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--warna-primary);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--warna-text);
+            font-weight: bold;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--warna-text);
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--warna-card);
+            border-top: 1px solid var(--bg-sekunder);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer-logo {
+            font-family: var(--font-brittany);
+            font-size: 1.8rem;
+            color: var(--warna-primary);
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--warna-text);
+            opacity: 0.75;
+            max-width: 600px;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        /* Hamburger Button Styles */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 101;
+        }
+
+        .nav-toggle .bar {
+            height: 2px;
+            width: 100%;
+            background-color: var(--warna-primary);
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+            .nav-container {
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .nav-toggle {
+                display: flex;
+            }
+            nav {
+                display: none;
+                width: 100%;
+                margin-top: 1rem;
+                transition: all 0.3s ease;
+            }
+            nav.active {
+                display: block;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+                padding-top: 0.5rem;
+                border-top: 1px solid var(--bg-sekunder);
+            }
+            nav a {
+                display: block;
+                text-align: center;
+                padding: 0.75rem;
+            }
+            .container {
+                padding: 2rem 1rem;
+            }
+            .hero {
+                padding: 2.5rem 1.25rem;
+                border-radius: 16px;
+                gap: 1.5rem;
+            }
+            .title {
+                font-size: 2.8rem;
+            }
+            .desc {
+                font-size: 1rem;
+            }
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            .btn-group {
+                flex-direction: column;
+                width: 100%;
+                gap: 0.75rem;
+            }
+            .features {
+                grid-template-cols: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .nav-toggle.active .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .nav-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-toggle.active .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigasi -->
+    <header>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                Healthy Diet
+                <span class="logo-sub">Planner</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="/" class="active">Beranda</a></li>
+                    <li><a href="/menu">Menu Diet</a></li>
+                    <li><a href="/olahraga">Olahraga</a></li>
+                    <li><a href="/bmi">Kalkulator BMI</a></li>
+                    <li><a href="/tentang">Tentang</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Konten Utama -->
+    <div class="container">
+        
+        <!-- Hero Section -->
+        <div class="hero">
+            <span class="badge">Edukasi Hidup Sehat &amp; Bugar</span>
+            <h1 class="title">Healthy Diet Planner</h1>
+            <p class="desc">
+                Website untuk membantu pengguna memilih makanan sehat dan olahraga yang tepat untuk mencapai berat badan ideal dan menjaga kesehatan tubuh.
+            </p>
+            <div class="btn-group">
+                <a href="/menu" class="btn btn-primary">Lihat Menu Diet</a>
+                <a href="/olahraga" class="btn btn-outline">Lihat Olahraga</a>
+                <a href="/tentang" class="btn btn-secondary">Tentang Website</a>
+            </div>
+        </div>
+
+        <!-- Fitur Cards -->
+        <div class="features">
+            <div class="card">
+                <div class="card-icon">🍎</div>
+                <h3>25 Menu Diet Seimbang</h3>
+                <p>Koleksi lengkap menu sarapan, makan siang, makan malam, dan camilan rendah kalori penunjang metabolisme yang stabil.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏃‍♂️</div>
+                <h3>15 Gerakan Olahraga</h3>
+                <p>Panduan latihan fisik mulai tingkat kesulitan mudah hingga tinggi lengkap dengan kalkulasi durasi dan estimasi kalori yang terbakar.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🧮</div>
+                <h3>Kalkulator BMI Pintar</h3>
+                <p>Analisis indeks berat badan Anda secara cepat dan dapatkan rekomendasi asupan kalori serta strategi diet harian yang paling pas.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">Healthy Diet Planner</div>
+        <p class="footer-text">Mulailah hari baru Anda dengan asupan gizi seimbang dan olahraga teratur demi tubuh sehat dan bugar sepanjang usia.</p>
+        <p style="font-size: 0.75rem; color: var(--warna-text); opacity: 0.6;">&copy; 2026 Healthy Diet Planner. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "Healthy Diet Planner",
+  "description": "A comprehensive healthy diet and fitness planner designed to help you reach your ideal weight with meal recommendations, exercise guides, and a BMI calculator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy Diet Planner - Kalkulator BMI &amp; Jadwal</title>
+    <!-- Google Fonts Import -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-utama: #F9F6F0;
+            --bg-sekunder: #DCD3E3;
+            --warna-primary: #6862BC;
+            --warna-card: #FBFAF4;
+            --warna-text: #1E5875;
+            --font-brittany: "Great Vibes", cursive;
+            --font-isi: "Lora", "Times New Roman", serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-utama);
+            color: var(--warna-text);
+            font-family: var(--font-isi);
+            line-height: 1.6;
+        }
+
+        /* Header & Navigasi */
+        header {
+            background-color: var(--warna-card);
+            border-bottom: 2px solid var(--bg-sekunder);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-brittany);
+            font-size: 2.2rem;
+            color: var(--warna-primary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            font-family: var(--font-isi);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: block;
+            margin-top: -10px;
+            color: var(--warna-text);
+            opacity: 0.8;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--warna-text);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--warna-primary);
+            color: #ffffff;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .heading-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-family: var(--font-brittany);
+            font-size: 4rem;
+            color: var(--warna-primary);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--warna-text);
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Grid layout */
+        .grid-layout {
+            display: grid;
+            grid-template-cols: 1fr;
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (min-width: 992px) {
+            .grid-layout {
+                grid-template-cols: 5fr 7fr;
+            }
+        }
+
+        /* Form Card */
+        .card-form {
+            background-color: var(--warna-card);
+            border: 1px solid var(--bg-sekunder);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
+            height: max-content;
+        }
+
+        .form-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-b: 1px solid var(--bg-sekunder);
+            color: var(--warna-text);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--warna-text);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--bg-sekunder);
+            background-color: var(--bg-utama);
+            color: var(--warna-text);
+            font-size: 1rem;
+            font-family: var(--font-isi);
+            font-weight: bold;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--warna-primary);
+        }
+
+        .input-suffix {
+            position: absolute;
+            right: 1rem;
+            top: 0.75rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+            opacity: 0.6;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--warna-primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+        }
+
+        /* Result Panel */
+        .result-panel {
+            background-color: var(--warna-card);
+            border: 1.5px solid var(--bg-sekunder);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--bg-sekunder);
+            padding-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .bmi-badge {
+            background-color: var(--bg-utama);
+            border: 1px solid var(--bg-sekunder);
+            border-radius: 12px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .bmi-val {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--warna-primary);
+            margin-left: 0.5rem;
+        }
+
+        /* Category classes */
+        .alert-box {
+            padding: 1.2rem;
+            border-radius: 12px;
+            border: 1px solid transparent;
+            font-weight: bold;
+        }
+
+        .alert-box.kurus {
+            background-color: #EBF8FF;
+            color: #2B6CB0;
+            border-color: #BEE3F8;
+        }
+
+        .alert-box.normal {
+            background-color: #F0FDF4;
+            color: #166534;
+            border-color: #BBF7D0;
+        }
+
+        .alert-box.overweight {
+            background-color: #FFFDF5;
+            color: #9C4221;
+            border-color: #FEEBC8;
+        }
+
+        .alert-box.obesitas {
+            background-color: #FFF5F5;
+            color: #9B2C2C;
+            border-color: #FED7D7;
+        }
+
+        .strategy-box {
+            background-color: var(--bg-utama);
+            border: 1px solid rgba(220, 211, 227, 0.7);
+            padding: 1.5rem;
+            border-radius: 14px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Timeline Schedule */
+        .schedule-title-section {
+            border-top: 2px solid var(--bg-sekunder);
+            padding-top: 4rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .timeline {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .timeline-item {
+            background-color: var(--warna-card);
+            border: 1px solid var(--bg-sekunder);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            transition: border-color 0.3s;
+        }
+
+        .timeline-item:hover {
+            border-color: var(--warna-primary);
+        }
+
+        .timeline-left {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .time-badge-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .time-val {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--warna-primary);
+            font-family: monospace;
+        }
+
+        .type-tag {
+            font-size: 0.65rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            background-color: var(--bg-sekunder);
+            color: var(--warna-text);
+        }
+
+        .type-tag.snack {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .type-tag.water {
+            background-color: #E0F2FE;
+            color: #075985;
+        }
+
+        .item-activity {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--warna-text);
+        }
+
+        .item-details {
+            font-size: 0.88rem;
+            opacity: 0.85;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        .timeline-icon {
+            font-size: 2rem;
+            background-color: var(--bg-utama);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--bg-sekunder);
+        }
+
+        /* Legend indicators */
+        .indicator-chart {
+            display: grid;
+            grid-template-cols: repeat(4, 1fr);
+            gap: 0.5rem;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .ind-item {
+            padding: 0.5rem;
+            border-radius: 6px;
+            border: 1px solid transparent;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--warna-card);
+            border-top: 1px solid var(--bg-sekunder);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-logo {
+            font-family: var(--font-brittany);
+            font-size: 1.8rem;
+            color: var(--warna-primary);
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--warna-text);
+            opacity: 0.75;
+            max-width: 600px;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        /* Hamburger Button Styles */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 101;
+        }
+
+        .nav-toggle .bar {
+            height: 2px;
+            width: 100%;
+            background-color: var(--warna-primary);
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+            .nav-container {
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .nav-toggle {
+                display: flex;
+            }
+            nav {
+                display: none;
+                width: 100%;
+                margin-top: 1rem;
+                transition: all 0.3s ease;
+            }
+            nav.active {
+                display: block;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+                padding-top: 0.5rem;
+                border-top: 1px solid var(--bg-sekunder);
+            }
+            nav a {
+                display: block;
+                text-align: center;
+                padding: 0.75rem;
+            }
+            .container {
+                padding: 2rem 1rem;
+            }
+            .section-title {
+                font-size: 2.8rem;
+            }
+            .section-subtitle {
+                font-size: 1rem;
+            }
+            .grid-layout {
+                grid-template-cols: 1fr;
+                gap: 1.5rem;
+            }
+            .card-form {
+                padding: 1.5rem;
+                border-radius: 16px;
+            }
+            .result-panel {
+                padding: 1.5rem;
+                border-radius: 16px;
+                gap: 1rem;
+            }
+            .indicator-chart {
+                grid-template-cols: repeat(2, 1fr);
+                gap: 0.4rem;
+            }
+            .timeline-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1.25rem;
+                gap: 1rem;
+                border-radius: 16px;
+            }
+            .timeline-left {
+                min-width: 100%;
+            }
+            .timeline-icon {
+                align-self: flex-end;
+            }
+        }
+
+        .nav-toggle.active .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .nav-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-toggle.active .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigasi -->
+    <header>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                Healthy Diet
+                <span class="logo-sub">Planner</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="/">Beranda</a></li>
+                    <li><a href="/menu">Menu Diet</a></li>
+                    <li><a href="/olahraga">Olahraga</a></li>
+                    <li><a href="/bmi" class="active">Kalkulator BMI</a></li>
+                    <li><a href="/tentang">Tentang</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Konten Utama -->
+    <div class="container">
+        
+        <div class="heading-section">
+            <h1 class="section-title">Kalkulator BMI Pintar</h1>
+            <p class="section-subtitle">Ukur indeks massa tubuh harian Anda secara mandiri lalu pelajari anjuran rencana pengaturan kalori diet serta rutinitas fisik yang disarankan harian.</p>
+        </div>
+
+        <!-- Grid Layout Form dan Result -->
+        <div class="grid-layout">
+            
+            <!-- Panel Form Sebelah Kiri -->
+            <div class="card-form">
+                <h3 class="form-title">⚖️ Input Data Fisik</h3>
+                
+                <form action="/bmi" method="POST">
+                    <div class="form-group">
+                        <label for="weight" class="form-label">Berat Badan Anda (kg)</label>
+                        <div class="input-wrapper">
+                            <input type="number" step="any" min="1" required name="weight" id="weight" value="{{ weight }}" placeholder="Contoh: 65" class="form-input">
+                            <span class="input-suffix">KG</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="height" class="form-label">Tinggi Badan Anda (cm)</label>
+                        <div class="input-wrapper">
+                            <input type="number" step="any" min="10" required name="height" id="height" value="{{ height }}" placeholder="Contoh: 170" class="form-input">
+                            <span class="input-suffix">CM</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Hitung BMI &amp; Cek Diet</button>
+                </form>
+
+                <div style="margin-top: 1.5rem; border-top: 1px solid var(--bg-sekunder); padding-top: 1rem;">
+                    <span style="font-size: 0.8rem; font-weight: bold; opacity: 0.8; display: block; margin-bottom: 0.5rem;">Grafik Klasifikasi BMI:</span>
+                    <div class="indicator-chart">
+                        <div class="ind-item" style="background-color: #EBF8FF; color: #2B6CB0; border-color: #BEE3F8;">Kurus<br>&lt;18.5</div>
+                        <div class="ind-item" style="background-color: #F0FDF4; color: #166534; border-color: #BBF7D0;">Normal<br>18.5-25</div>
+                        <div class="ind-item" style="background-color: #FFFDF5; color: #9C4221; border-color: #FEEBC8;">Gemuk<br>25-30</div>
+                        <div class="ind-item" style="background-color: #FFF5F5; color: #9B2C2C; border-color: #FED7D7;">Obesitas<br>&ge;30</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel Hasil Sebelah Kanan -->
+            <div>
+                {% if bmi %}
+                    <div class="result-panel">
+                        <div class="result-header">
+                            <div>
+                                <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: bold; opacity: 0.75; display: block;">Hasil Analisis Anda</span>
+                                <h3 style="font-size: 1.4rem; font-weight: bold; color: var(--warna-text);">Analisis Strategi Diet</h3>
+                            </div>
+                            <div class="bmi-badge">
+                                Nilai BMI: <span class="bmi-val">{{ bmi }}</span>
+                            </div>
+                        </div>
+
+                        {% if category == 'Kurus' %}
+                            <div class="alert-box kurus">Kategori: Kurus (Kekurangan Berat Badan Sehat)</div>
+                        {% elif category == 'Normal' %}
+                            <div class="alert-box normal">Kategori: Normal (Ideal &amp; Sangat Sehat!)</div>
+                        {% elif category == 'Overweight' %}
+                            <div class="alert-box overweight">Kategori: Overweight (Kelebihan Berat Badan Ringan)</div>
+                        {% else %}
+                            <div class="alert-box obesitas">Kategori: Obesitas (Kelebihan Berat Badan Tingkat Berat)</div>
+                        {% endif %}
+
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                          <span style="font-weight: bold; font-size: 0.9rem; color: var(--warna-primary);">Anjuran Menu &amp; Olahraga:</span>
+                          <div class="strategy-box">
+                              "{{ recommendation }}"
+                          </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div style="background-color: var(--warna-card); border: 2px dashed var(--bg-sekunder); border-radius: 20px; padding: 4rem 2rem; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem;">
+                        <span style="font-size: 3rem;">⚖️</span>
+                        <h4 style="font-size: 1.2rem; font-weight: bold;">Hasil Belum Tersedia</h4>
+                        <p style="opacity: 0.8; font-size: 0.9rem; max-width: 350px;">Masukkan data berat badan dan tinggi badan Anda secara akurat pada form sebelah kiri, lalu klik tombol hitung.</p>
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <!-- Jadwal Diet Harian Section -->
+        <div class="schedule-title-section">
+            <div class="heading-section">
+                <h2 class="section-title">Jadwal Diet Harian</h2>
+                <p class="section-subtitle">Mengatur sirkadian waktu makan dan minum adalah rahasia memperlancar metabolisme. Ikutilah acuan jadwal teratur harian berikut.</p>
+            </div>
+
+            <div class="timeline">
+                {% for item in schedule %}
+                    <div class="timeline-item">
+                        <div class="timeline-left">
+                            <div class="time-badge-container">
+                                <span class="time-val">{{ item.time }}</span>
+                                {% if item.type == 'meal' %}
+                                    <span class="type-tag">Makan Utama</span>
+                                {% elif item.type == 'snack' %}
+                                    <span class="type-tag snack">Selingan</span>
+                                {% else %}
+                                    <span class="type-tag water">Hidrasi</span>
+                                {% endif %}
+                            </div>
+                            <h3 class="item-activity">{{ item.activity }}</h3>
+                            <p class="item-details">{{ item.details }}</p>
+                        </div>
+                        <div class="timeline-icon">
+                            {% if item.type == 'meal' %}
+                                🍲
+                            {% elif item.type == 'snack' %}
+                                🍎
+                            <!-- Air -->
+                            {% else %}
+                                💧
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">Healthy Diet Planner</div>
+        <p class="footer-text">Mulailah hari baru Anda dengan asupan gizi seimbang dan olahraga teratur demi tubuh sehat dan bugar sepanjang usia.</p>
+        <p style="font-size: 0.75rem; color: var(--warna-text); opacity: 0.6;">&copy; 2026 Healthy Diet Planner. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+    </script>
+
+</body>
+</html>
